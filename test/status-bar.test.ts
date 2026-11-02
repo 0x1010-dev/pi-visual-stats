@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import * as assert from "node:assert/strict";
 
-import { buildBottomBar, formatTokens, type BarState, type BarTheme } from "../.pi/extensions/pi-visual-stats/src/status-bar.js";
+import { buildBottomBar, formatTokens, type BarState, type BarTheme } from "../src/status-bar.js";
 import { visibleWidth } from "@earendil-works/pi-tui";
 
 interface Spans {
@@ -65,7 +65,7 @@ test("solid line: fill = success, idle = border, no panels", () => {
 	// used 60000/128000 ≈ 0.469
 	const fillCount = t.spans.filter((s) => s.color === "success").map((s) => s.text.length).reduce((a, b) => a + b, 0);
 	const idleCount = t.spans
-		.filter((s) => s.color === "border" && s.text !== "\u2538")
+		.filter((s) => s.color === "border" && s.text !== "\u00B7")
 		.map((s) => s.text.length)
 		.reduce((a, b) => a + b, 0);
 	assert.ok(Math.abs(fillCount / mid - 0.469) < 0.03, `fill=${fillCount} mid=${mid}`);
@@ -75,14 +75,14 @@ test("solid line: fill = success, idle = border, no panels", () => {
 	assert.ok(!line.includes("━"), "no heavy glyph");
 });
 
-test("marker ┸ at ≈ threshold fraction, in the line's own color", () => {
+test("marker · at ≈ threshold fraction, in the line's own color", () => {
 	const t = fakeTheme();
 	const width = 120;
 	const line = String(buildBottomBar(width, t, borderFn(t), base) as string);
-	const idx = line.indexOf("\u2538");
+	const idx = line.indexOf("\u00B7");
 	const mid = width - "60k/128k".length - 1;
 	assert.ok(Math.abs(idx / mid - 0.88) < 0.01, `idx=${idx} mid=${mid}`);
-	assert.ok(t.spans.some((s) => s.color === "border" && s.text === "\u2538"), "marker in line/border color");
+	assert.ok(t.spans.some((s) => s.color === "border" && s.text === "\u00B7"), "marker in line/border color");
 	assert.ok(!t.spans.some((s) => s.color === "warning"), "no warning tint anywhere");
 });
 
@@ -90,7 +90,7 @@ test("past-threshold: fill still success, line still border color, marker unchan
 	const t = fakeTheme();
 	buildBottomBar(100, t, borderFn(t), { ...base, usedTokens: 118000 });
 	assert.ok(t.spans.some((s) => s.color === "success"), "filled segment still success");
-	assert.ok(t.spans.some((s) => s.color === "border" && s.text === "\u2538"), "marker in line color");
+	assert.ok(t.spans.some((s) => s.color === "border" && s.text === "\u00B7"), "marker in line color");
 	assert.ok(t.spans.some((s) => s.color === "border" && s.text.includes("─")), "idle line uses live border color");
 });
 
@@ -99,13 +99,13 @@ test("unknown usage: '?' stats, no fill, marker still shown", () => {
 	const line = String(buildBottomBar(100, t, borderFn(t), { ...base, usedTokens: null }) as string);
 	assert.ok(line.endsWith(` ?/128k`));
 	assert.ok(!t.spans.some((s) => s.color === "success"), "no fill");
-	assert.ok(line.includes("\u2538"), "threshold marker still shown");
+	assert.ok(line.includes("\u00B7"), "threshold marker still shown");
 });
 
 test("no threshold -> no marker", () => {
 	const t = fakeTheme();
 	const line = String(buildBottomBar(100, t, borderFn(t), { ...base, thresholdFraction: null }) as string);
-	assert.ok(!line.includes("\u2538"));
+	assert.ok(!line.includes("\u00B7"));
 });
 
 test("never overflows; null when too narrow or no window", () => {

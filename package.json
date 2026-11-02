@@ -1,11 +1,24 @@
 {
 	"name": "pi-visual-stats",
 	"version": "0.1.0",
-	"private": true,
 	"description": "Pi extension: prompt-box bottom border as a context progress bar + compact footer",
 	"type": "module",
+	"keywords": [
+		"pi-package"
+	],
+	"pi": {
+		"extensions": [
+			"./src/index.ts"
+		]
+	},
 	"scripts": {
-		"test": "node --test test/"
+		"test": "bun test",
+		"typecheck": "bunx tsc --noEmit",
+		"dev:link": "bash scripts/dev-link.sh"
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-coding-agent": "*",
+		"@earendil-works/pi-tui": "*"
 	},
 	"devDependencies": {
 		"@types/node": "^26.6.6",

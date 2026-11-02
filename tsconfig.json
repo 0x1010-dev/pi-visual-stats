@@ -8,5 +8,5 @@
 		"skipLibCheck": true,
 		"types": ["node"]
 	},
-	"include": [".pi/extensions/pi-visual-stats/**/*.ts", "test/**/*.ts"]
+	"include": ["src/**/*.ts", "test/**/*.ts"]
 }

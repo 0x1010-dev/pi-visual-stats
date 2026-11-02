@@ -1,0 +1,4 @@
+# pi packages are provided by the host (or dev-link.sh for local dev) —
+# never pull them from the registry, or pi's extension module mapping breaks.
+[install]
+autoInstallPeers = false

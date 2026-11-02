@@ -1,15 +1,15 @@
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 
-import { createEditorFactory } from "./src/editor.js";
-import { createFooter } from "./src/footer.js";
+import { createEditorFactory } from "./editor.js";
+import { createFooter } from "./footer.js";
 
 /**
  * pi-visual-stats
  *
  * - Bottom border of the prompt box = context progress bar:
- *   ────┸────── 60k/128k
+ *   ────·────── 60k/128k
  *   (fill = context used in `success` green; idle line in the editor's
- *   live border color = top separator; ┸ = auto-compaction threshold in
+ *   live border color = top separator; · = auto-compaction threshold in
  *   the line's own color; then ` used/total` dimmed)
  * - Hidden lines below the editor fall back to Pi's original
  *   border (solid, centered "↓ N more", border color).
@@ -17,10 +17,7 @@ import { createFooter } from "./src/footer.js";
  *   via theme.fg("dim") per part, like pi's original footer.
  */
 export default function (pi: ExtensionAPI) {
-	let activeCtx: ExtensionContext | undefined;
-
 	const apply = (ctx: ExtensionContext) => {
-		activeCtx = ctx;
 		ctx.ui.setEditorComponent(createEditorFactory({ pi, ctx }));
 		ctx.ui.setFooter(
 			createFooter(ctx, () => {

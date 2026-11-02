@@ -13,8 +13,8 @@ export interface BarState {
 }
 
 const LINE = "─";
-/** Compaction threshold marker (box drawing), rendered in the line's own color. */
-const MARKER = "\u2538";
+/** Compaction threshold marker: inline middle dot, rendered in the line's own color. */
+const MARKER = "\u00B7";
 
 export function formatTokens(count: number): string {
 	if (count < 1000) return count.toString();
@@ -26,7 +26,7 @@ export function formatTokens(count: number): string {
 
 /**
  * Render the middle bar segment (solid line):
- *   used = green fill, rest = live border color, ┸ = compaction threshold
+ *   used = green fill, rest = live border color, · = compaction threshold
  *   (same color as the line itself).
  */
 function renderBar(
@@ -65,9 +65,9 @@ function renderBar(
 
 /**
  * Render the bottom bar:
- *   ──────┸──────── 60k/128k
+ *   ──────·──────── 60k/128k
  * (fill = context used in `success` green; idle line in the editor's live
- * border color; ┸ = auto-compaction threshold, in the line's own color;
+ * border color; · = auto-compaction threshold, in the line's own color;
  * then ` used/total` dimmed. Model + effort live in the footer.)
  * Returns null when unknown or too narrow (caller falls back to the
  * default border).

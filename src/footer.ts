@@ -12,10 +12,10 @@ interface FooterData {
 function formatCwd(cwd: string, home: string | undefined): string {
 	if (!home) return cwd;
 	const rel = relative(resolve(home), resolve(cwd));
-	if (rel === "" || (rel !== ".." && !rel.startsWith("..") && !rel.startsWith("/"))) {
-		return rel === "" ? "~" : `~/${rel}`;
+	if (rel !== "" && !rel.startsWith("..") && !rel.startsWith("/")) {
+		return `~/${rel}`;
 	}
-	return cwd;
+	return rel === "" ? "~" : cwd;
 }
 
 /**
