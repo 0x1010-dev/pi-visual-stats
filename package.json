@@ -9,11 +9,13 @@
 	"pi": {
 		"extensions": [
 			"./src/index.ts"
-		]
+		],
+		"image": "./preview.png"
 	},
 	"scripts": {
 		"test": "bun test",
 		"typecheck": "bunx tsc --noEmit",
+		"preview": "bun run scripts/preview.ts",
 		"dev:link": "bash scripts/dev-link.sh"
 	},
 	"peerDependencies": {
@@ -22,6 +24,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^26.6.6",
+		"canvas": "^3.2.3",
 		"typescript": "^5.5.0"
 	}
 }

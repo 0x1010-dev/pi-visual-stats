@@ -2,6 +2,8 @@
 
 Pi extension: turns the prompt box's bottom border into a live context progress bar, and cleans up the footer below it.
 
+![preview](./preview.png)
+
 ## What it looks like
 
 ```
@@ -23,8 +25,10 @@ Pi extension: turns the prompt box's bottom border into a live context progress 
 The repo is a [pi package](https://pi.dev/packages):
 
 ```bash
-pi install git:github.com/0x1010-dev/pi-visual-stats   # or npm:0x1010-dev/pi-visual-stats
-pi install ./pi-visual-stats                       # local path
+pi install git:github.com/0x1010-dev/pi-visual-stats
+pi install ./pi-visual-stats   # local path
+
+# (once published to npm, also: pi install npm:0x1010-dev/pi-visual-stats)
 ```
 
 No runtime dependencies: pi's own packages (`@earendil-works/pi-coding-agent`, `@earendil-works/pi-tui`) are declared as `*` peerDependencies and supplied by the host.
@@ -32,7 +36,7 @@ No runtime dependencies: pi's own packages (`@earendil-works/pi-coding-agent`, `
 ## Layout
 
 ```
-package.json                   # pi manifest (pi.extensions), peerDependencies, scripts
+package.json                   # pi manifest (pi.extensions + pi.image), peerDependencies, scripts
 bunfig.toml                    # autoInstallPeers = false — pi packages come from the host
 src/
   index.ts                     # extension entry: session_start wiring + /vstat toggle
@@ -41,6 +45,8 @@ src/
   footer.ts                    # custom footer component factory
 test/status-bar.test.ts
 scripts/dev-link.sh            # re-link node_modules/@earendil-works/* for local tsc
+scripts/preview.ts             # deterministic gallery preview (renders the real bar → PNG)
+preview.png                    # committed gallery preview (pi.image)
 .pi/extensions/pi-visual-stats -> .   # dev-only symlink so pi loads it in-tree
 ```
 
