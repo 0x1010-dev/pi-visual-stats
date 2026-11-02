@@ -23,7 +23,7 @@ Pi extension: turns the prompt box's bottom border into a live context progress 
 The repo is a [pi package](https://pi.dev/packages):
 
 ```bash
-pi install git:github.com/<you>/pi-visual-stats   # or npm:@you/pi-visual-stats
+pi install git:github.com/0x1010-dev/pi-visual-stats   # or npm:0x1010-dev/pi-visual-stats
 pi install ./pi-visual-stats                       # local path
 ```
 
