@@ -1,3 +1,5 @@
+> **Moved:** this extension now lives in the [pi-0x1010](https://github.com/0x1010-dev/pi-0x1010) monorepo under [`extensions/pi-visual-stats`](https://github.com/0x1010-dev/pi-0x1010/tree/main/extensions/pi-visual-stats). Full history was folded in. This repo is archived.
+
 # pi-visual-stats
 
 Pi extension: turns the prompt box's bottom border into a live context progress bar, and cleans up the footer below it.
